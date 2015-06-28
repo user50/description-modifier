@@ -8,6 +8,12 @@ repositories {
 
 }
 
+compileJava {
+    options.fork = true
+    options.forkOptions.executable = "javac" // assumes that javac is on PATH
+    options.compilerArgs << "-XDignore.symbol.file"
+}
+
 dependencies {
 
     compile 'stax:stax-api:1.0.1'
