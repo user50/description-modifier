@@ -15,7 +15,8 @@ public class XmlDescriptionEventHandler implements XmlEventHandler {
     private OfferDescriptionFragmentProvider descriptionFragmentProvider;
 
     private boolean inDescription;
-    private String currentId;;
+    private String currentId;
+    private boolean modified = false;
 
     public XmlDescriptionEventHandler(OfferDescriptionFragmentProvider descriptionFragmentProvider) {
         this.descriptionFragmentProvider = descriptionFragmentProvider;
@@ -41,13 +42,17 @@ public class XmlDescriptionEventHandler implements XmlEventHandler {
         if (event.isEndElement() && event.asEndElement().getName().getLocalPart().equals("description") )
         {
             inDescription = false;
+            modified = false;
         }
 
-        if (inDescription && event.isCharacters())
+        if (!modified && inDescription && event.isCharacters())
         {
+
             String description = ((CharacterEvent) event).getData();
 
             ((CharacterEvent) event).setData(descriptionFragmentProvider.get(currentId) + description);
+
+            modified = true;
         }
 
     }

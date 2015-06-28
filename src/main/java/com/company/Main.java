@@ -1,7 +1,7 @@
 package com.company;
 
 import com.company.stax.OfferDescriptionFragmentProvider;
-import com.company.stax.OfferUrlsCollector;
+import com.company.stax.handlers.OfferUrlsCollector;
 import com.company.stax.StAXService;
 import com.company.stax.handlers.*;
 
@@ -49,7 +49,9 @@ public class Main {
 
         XmlEventHandler multiEventHandler = new XmlMultiEventHandler(handlers, out);
 
+        System.out.println("Start processing...");
         stAXService.process(multiEventHandler);
+        System.out.println("done");
 
         out.close();
     }

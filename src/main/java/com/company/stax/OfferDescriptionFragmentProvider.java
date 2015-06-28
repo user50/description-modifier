@@ -3,6 +3,7 @@ package com.company.stax;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -21,7 +22,10 @@ public class OfferDescriptionFragmentProvider {
 
     public String get(String offerId){
         try {
-            return new String(template.replace(":url", urls.get(offerId)).getBytes(), encoding);
+            if (Charset.forName(encoding).toString().equals("UTF-8"))
+                return template.replace(":url", urls.get(offerId));
+            else
+                return new String(template.replace(":url", urls.get(offerId)).getBytes(), encoding);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
