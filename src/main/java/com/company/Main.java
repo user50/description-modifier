@@ -8,11 +8,8 @@ import com.company.stax.StAXService;
 import com.company.stax.handlers.*;
 
 import javax.xml.stream.XMLEventFactory;
-import javax.xml.stream.XMLEventWriter;
-import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +42,14 @@ public class Main {
             handlers.add(new XmlAddDescriptionElement(XMLEventFactory.newInstance(), writeService, descriptionFragmentProvider));
         }
 
-        if (config.isModifyId())
-            handlers.add(new OfferIdModifier(config.getPrefix()));
+        if (config.isModifyOfferId())
+            handlers.add(new AttributeValueModifier("offer", "id", config.getOfferIdPrefix()));
+
+        if (config.isModifyCategoryId()){
+            handlers.add(new AttributeValueModifier("category", "id", config.getCategoryIdPrefix()));
+            handlers.add(new AttributeValueModifier("category", "parentId", config.getCategoryIdPrefix()));
+            handlers.add(new OffersCategoryIdModifier(config.getCategoryIdPrefix()));
+        }
 
         XmlEventHandler multiEventHandler = new XmlMultiEventHandler(handlers, writeService);
 

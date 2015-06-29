@@ -12,7 +12,6 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by user50 on 20.06.2015.
@@ -28,8 +27,8 @@ public class OldMain {
         if (config.isModifyDescription())
             offerOperations.add(new ModifyDescription(config.getTemplate()));
 
-        if (config.isModifyId())
-            offerOperations.add(new AddPrefixToId(config.getPrefix()));
+        if (config.isModifyOfferId())
+            offerOperations.add(new AddPrefixToId(config.getOfferIdPrefix()));
 
         XPATHModifier modifier = new XPATHModifier(config, offerOperations);
         modifier.run();

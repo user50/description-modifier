@@ -36,14 +36,24 @@ public class Config {
         return Boolean.parseBoolean(properties.getProperty("modifyDescription"));
     }
 
-    public boolean isModifyId()
+    public boolean isModifyOfferId()
     {
-        return Boolean.parseBoolean(properties.getProperty("modifyId"));
+        return Boolean.parseBoolean(properties.getProperty("modifyOfferId"));
     }
 
-    public String getPrefix()
+    public String getOfferIdPrefix()
     {
-        return properties.getProperty("idPrefix");
+        return properties.getProperty("offerIdPrefix");
+    }
+
+    public boolean isModifyCategoryId()
+    {
+        return Boolean.parseBoolean(properties.getProperty("modifyCategoryId"));
+    }
+
+    public String getCategoryIdPrefix()
+    {
+        return properties.getProperty("categoryIdPrefix");
     }
 
     public String getTemplate()
