@@ -35,6 +35,8 @@ public class Main {
         WriteService writeService = new WriteServiceProvider(urls.size(), config.getOutputDir(), config.getFilesCount()).get();
 
         List<XmlEventHandler> handlers = new ArrayList<>();
+        handlers.add(new ProgressHandler(urls.size()));
+
         if(config.isModifyDescription())
         {
             handlers.add(new XmlDescriptionEventHandler(descriptionFragmentProvider));
