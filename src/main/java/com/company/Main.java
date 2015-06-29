@@ -1,6 +1,8 @@
 package com.company;
 
 import com.company.stax.OfferDescriptionFragmentProvider;
+import com.company.stax.WriteService;
+import com.company.stax.WriteServiceProvider;
 import com.company.stax.handlers.OfferUrlsCollector;
 import com.company.stax.StAXService;
 import com.company.stax.handlers.*;
@@ -33,26 +35,25 @@ public class Main {
         OfferDescriptionFragmentProvider descriptionFragmentProvider =
                 new OfferDescriptionFragmentProvider(urls, config.getTemplate(), config.getEncoding());
 
-        XMLOutputFactory ofactory = XMLOutputFactory.newFactory();
-        XMLEventWriter out = ofactory.createXMLEventWriter(new FileOutputStream(config.getOutputFile()), config.getEncoding());
+        WriteService writeService = new WriteServiceProvider(urls.size(), config.getOutputDir(), config.getFilesCount()).get();
 
         List<XmlEventHandler> handlers = new ArrayList<>();
         if(config.isModifyDescription())
         {
             handlers.add(new XmlDescriptionEventHandler(descriptionFragmentProvider));
-            handlers.add(new XmlAddDescription(XMLEventFactory.newInstance(), out, descriptionFragmentProvider));
-            handlers.add(new XmlAddDescriptionElement(XMLEventFactory.newInstance(), out, descriptionFragmentProvider));
+            handlers.add(new XmlAddDescription(XMLEventFactory.newInstance(), writeService, descriptionFragmentProvider));
+            handlers.add(new XmlAddDescriptionElement(XMLEventFactory.newInstance(), writeService, descriptionFragmentProvider));
         }
 
         if (config.isModifyId())
             handlers.add(new OfferIdModifier(config.getPrefix()));
 
-        XmlEventHandler multiEventHandler = new XmlMultiEventHandler(handlers, out);
+        XmlEventHandler multiEventHandler = new XmlMultiEventHandler(handlers, writeService);
 
         System.out.println("Start processing...");
         stAXService.process(multiEventHandler);
         System.out.println("done");
 
-        out.close();
+        writeService.close();
     }
 }

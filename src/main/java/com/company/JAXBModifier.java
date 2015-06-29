@@ -37,6 +37,6 @@ public class JAXBModifier {
                 offer.description =  template.replace(":url",url) + offer.description ;
         }
 
-        Util.marshal(ymlCatalog, config.getOutputFile(), encoding);
+        Util.marshal(ymlCatalog, config.getOutputDir(), encoding);
     }
 }

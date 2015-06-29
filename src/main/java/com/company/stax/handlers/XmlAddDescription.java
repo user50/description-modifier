@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
+import javax.xml.stream.util.XMLEventConsumer;
 import java.util.Iterator;
 
 /**
@@ -16,13 +17,13 @@ import java.util.Iterator;
 public class XmlAddDescription implements XmlEventHandler {
     private OfferDescriptionFragmentProvider descriptionFragmentProvider;
     private XMLEventFactory xmlEventFactory;
-    private XMLEventWriter out;
+    private XMLEventConsumer out;
 
     private boolean inDescription;
     private boolean isTextExists;
     private String currentId;
 
-    public XmlAddDescription(XMLEventFactory xmlEventFactory, XMLEventWriter out,
+    public XmlAddDescription(XMLEventFactory xmlEventFactory, XMLEventConsumer out,
                              OfferDescriptionFragmentProvider descriptionFragmentProvider) {
         this.xmlEventFactory = xmlEventFactory;
         this.out = out;

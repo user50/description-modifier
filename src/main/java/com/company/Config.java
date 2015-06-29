@@ -21,9 +21,9 @@ public class Config {
         return properties.getProperty("inputFile");
     }
 
-    public String getOutputFile()
+    public String getOutputDir()
     {
-        return properties.getProperty("outputFile");
+        return properties.getProperty("outputDir");
     }
 
     public String getEncoding()
@@ -53,5 +53,14 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException("Unable to find config/template.html file. ");
         }
+    }
+
+    public int getFilesCount(){
+        int filesCount = Integer.valueOf(properties.getProperty("filesCount"));
+
+        if (filesCount <= 0)
+            throw new IllegalArgumentException("filesCount has to be a positive integer");
+
+        return filesCount;
     }
 }

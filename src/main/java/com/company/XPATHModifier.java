@@ -65,6 +65,6 @@ public class XPATHModifier {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "shops.dtd");
         doc.setXmlStandalone(true);
-        transformer.transform(new DOMSource(doc), new StreamResult(config.getOutputFile()));
+        transformer.transform(new DOMSource(doc), new StreamResult(config.getOutputDir()));
     }
 }
