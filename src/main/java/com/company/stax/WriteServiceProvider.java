@@ -19,9 +19,10 @@ public class WriteServiceProvider {
     private String encoding;
     private int filesCount;
 
-    public WriteServiceProvider(int offersCount, String outputDir, int filesCount) {
+    public WriteServiceProvider(int offersCount, String outputDir, String encoding, int filesCount) {
         this.offersCount = offersCount;
         this.outputDir = outputDir;
+        this.encoding = encoding;
         this.filesCount = filesCount;
     }
 

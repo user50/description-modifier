@@ -73,6 +73,9 @@ public class WriteService implements XMLEventConsumer {
     }
 
     private void incrementIndexOut(){
+        if (outs.size() - 1 == outIndex )
+            return;
+
         writedOffers++;
 
         if (writedOffers-1 > offersCount/outs.size())

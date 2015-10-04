@@ -32,7 +32,7 @@ public class Main {
         OfferDescriptionFragmentProvider descriptionFragmentProvider =
                 new OfferDescriptionFragmentProvider(urls, config.getTemplate(), config.getEncoding());
 
-        WriteService writeService = new WriteServiceProvider(urls.size(), config.getOutputDir(), config.getFilesCount()).get();
+        WriteService writeService = new WriteServiceProvider(urls.size(), config.getOutputDir(), config.getEncoding(), config.getFilesCount()).get();
 
         List<XmlEventHandler> handlers = new ArrayList<>();
         handlers.add(new ProgressHandler(urls.size()));
