@@ -10,6 +10,7 @@ import com.company.stax.handlers.*;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLStreamException;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException, XMLStreamException {
+    public static void main(String[] args) throws FileNotFoundException, XMLStreamException, UnsupportedEncodingException {
         Config config = new ConfigProvider().get();
 
         StAXService stAXService = new StAXService(config.getInputFile(), config.getEncoding());

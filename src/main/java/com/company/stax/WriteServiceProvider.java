@@ -3,9 +3,7 @@ package com.company.stax;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +24,14 @@ public class WriteServiceProvider {
         this.filesCount = filesCount;
     }
 
-    public WriteService get() throws FileNotFoundException, XMLStreamException {
+    public WriteService get() throws FileNotFoundException, XMLStreamException, UnsupportedEncodingException {
         XMLOutputFactory ofactory = XMLOutputFactory.newFactory();
 
         List<XMLEventWriter> outs = new ArrayList<>();
 
         for (int i = 0; i < filesCount; i++){
             String fileName = outputDir + File.separator + "price" + i + ".xml";
-            XMLEventWriter out = ofactory.createXMLEventWriter(new FileOutputStream(fileName), encoding);
+            XMLEventWriter out = ofactory.createXMLEventWriter(new OutputStreamWriter(new FileOutputStream(fileName), encoding));
             outs.add(out);
         }
 
